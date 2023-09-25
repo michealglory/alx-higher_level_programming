@@ -5,11 +5,11 @@ void print_python_bytes(PyObject *p);
 void print_python_float(PyObject *p);
 
 /**
- * factorial - Calculate the factorial of a number.
- * @n: The number for which factorial is to be calculated
- * (non-negative integer).
+ * print_python_list - Print information about a Python list object.
+ * @p: A pointer to the Python list object.
  *
- * Return: The factorial of the input number.
+ * This function prints details about a Python list object, including its size,
+ * memory allocation, and the types of elements within the list.
  */
 void print_python_list(PyObject *p)
 {
