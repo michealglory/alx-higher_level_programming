@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Magic class that calculates the area and circumference of a circle"""
 import math
+
+
 class MagicClass:
     """Blueprint of the margic class"""
 
