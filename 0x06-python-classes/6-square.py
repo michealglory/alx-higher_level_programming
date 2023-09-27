@@ -19,14 +19,20 @@ class Square:
         self.position = position
 
     def __str__(self):
+        """Defines the str print method"""
+        
         self.my_print()
 
     @property
     def size(self):
+        """Returns the value of size"""
+        
         return self.__size
 
     @size.setter
     def size(self, value):
+        """Sets the value of size"""
+        
         if not isinstance(value, int):
             raise TypeError('size must be an integer')
         if value < 0:
@@ -35,10 +41,14 @@ class Square:
 
     @property
     def position(self):
+        """Returns the value of position"""
+        
         return self.__position
 
     @position.setter
     def position(self, value):
+        """sets the value of position"""
+        
         if not isinstance(value, tuple):
             raise TypeError('position must be a tuple of 2 positive integers')
         if len(value) != 2:
@@ -48,9 +58,13 @@ class Square:
         self.__position = value
 
     def area(self):
+        """Calculates the area of a square"""
+        
         return self.__size * self.__size
 
     def pos_print(self):
+        """Prints the position of a square"""
+        
         square_pos = ""
         if self.size == 0:
             return "\n"
@@ -65,4 +79,6 @@ class Square:
         return square_pos
 
     def my_print(self):
+        """Prints position"""
+        
         print(self.pos_print(), end='')
