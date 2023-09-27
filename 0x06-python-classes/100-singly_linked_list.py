@@ -53,7 +53,6 @@ class SinglyLinkedList:
         return print_output[:-1]
 
     def sorted_insert(self, value):
-        
         new_node = Node(value)
         if not self.head:
             self.head = new_node
