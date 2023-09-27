@@ -7,14 +7,12 @@ class Node:
 
     def __init__(self, data, next_node=None):
         """Initializes a node"""
-        
         self.data = data
         self.next_node = next_node
 
     @property
     def data(self):
         """Returns the value  of node data"""
-        
         return (self.__data)
 
     @data.setter
@@ -63,7 +61,6 @@ class SinglyLinkedList:
         """Handles Sorted insert into node
         Args:
             value: data to be inserted into node"""
-        
         new_node = Node(value)
         if not self.head:
             self.head = new_node
