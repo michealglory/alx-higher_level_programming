@@ -11,7 +11,8 @@ class Square:
             size: size of square. Default to 0.
             position: tuple of 2 integers
         Raises:
-            TypeError: if size is not integer or position is not a tuple of 2 integers
+            TypeError: if size is not integer or position is not a
+            tuple of 2 integers
             ValueError: if size is less than zero"""
 
         self.size = size
