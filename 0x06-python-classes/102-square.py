@@ -9,19 +9,16 @@ class Square:
         """Constructor for the square object
         Args: size: size of square
         """
-        
         self.__size = size
 
     @property
     def size(self):
         """return the value of size"""
-        
         return self.__size
 
     @size.setter
     def size(self, value):
         """Sets the value of size"""
-        
         if not isinstance(value, int):
             raise TypeError('size must be an integer')
         if value < 0:
@@ -30,7 +27,6 @@ class Square:
 
     def area(self):
         """Calculates the area of a square"""
-        
         return self.__size * self.__size
 
     def __le__(self, other):
