@@ -15,6 +15,7 @@ Usage:
     my_int = MyInt(value)
 """
 
+
 class MyInt(int):
     """
     MyInt Class
