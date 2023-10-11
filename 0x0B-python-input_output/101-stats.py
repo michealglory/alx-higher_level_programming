@@ -1,81 +1,67 @@
 #!/usr/bin/python3
-"""Reads from standard input and computes metrics.
+"""
+This script reads data from stdin line by line and computes
+metrics on the input data.
 
-This script reads log data from standard input, processes the data, and
-computes metrics related to file size and status codes. It accumulates
-statistics and prints the results.
+Input format: <IP Address> - [<date>] "GET /projects/260
+HTTP/1.1" <status code> <file size>
+Each 10 lines and after a keyboard interruption (CTRL + C),
+it prints the following statistics since the beginning:
+- Total file size: File size: <total size> (sum of all previous sizes)
+- Number of lines by status code (in ascending order).
+Possible status codes: 200, 301, 400, 401, 403, 404, 405, and 500.
 
 Example:
-    To use this script, you can pipe log data into it, for example:
-    $ cat access.log | python3 script.py
+    $ cat 101-generator.py | ./101-stats.py
+    File size: 5213
+    200: 2
+    401: 1
+    403: 2
+    404: 1
+    405: 1
+    500: 3
+    File size: 11320
+    200: 3
+    301: 2
+    400: 1
+    401: 2
+    403: 3
+    404: 4
+    405: 2
+    500: 3
 
-    The script will process the log data and print the accumulated
-    metrics, including file size and status code frequencies.
+Note:
+- If a status code doesn't appear in the input, it won't be included in
+the output.
+- Status codes are printed in ascending order.
 """
 
 
-def print_stats(size, status_codes):
-    """Print accumulated metrics.
+import sys
+from collections import defaultdict
 
-    Args:
-        size (int): The total file size accumulated from the log data.
-        status_codes (dict): A dictionary containing the frequency of
-        status codes.
+total_size = 0
+status_codes = defaultdict(int)
+line_count = 0
 
-    Returns:
-        None
+try:
+    for line in sys.stdin:
+        line_count += 1
+        parts = line.split()
+        if len(parts) >= 7:
+            status_code = parts[-2]
+            file_size = int(parts[-1])
+            total_size += file_size
+            status_codes[status_code] += 1
 
-    Example:
-        The function can be called to print accumulated metrics.
-        For instance:
-        ```
-        print_stats(1024, {'200': 10, '404': 5})
-        ```
-        This would result in the following output:
-        ```
-        File size: 1024
-        200: 10
-        404: 5
-        ```
-    """
-    print("File size: {}".format(size))
-    for key in sorted(status_codes):
-        print("{}: {}".format(key, status_codes[key]))
+        if line_count % 10 == 0:
+            print(f"File size: {total_size}")
+            for code in sorted(status_codes.keys()):
+                if status_codes[code] > 0:
+                    print(f"{code}: {status_codes[code]}")
 
-if __name__ == "__main":
-    import sys
-
-    file_size = 0
-    status_codes = {}
-    valid_codes = ['200', '301', '400', '401', '403', '404', '405', '500']
-    line_count = 0
-
-    try:
-        for line in sys.stdin:
-            if line_count == 10:
-                print_stats(file_size, status_codes)
-                line_count = 1
-            else:
-                line_count += 1
-
-            line = line.split()
-
-            try:
-                file_size += int(line[-1])
-            except (IndexError, ValueError):
-                pass
-
-            try:
-                if line[-2] in valid_codes:
-                    if status_codes.get(line[-2], -1) == -1:
-                        status_codes[line[-2]] = 1
-                    else:
-                        status_codes[line[-2]] += 1
-            except IndexError:
-                pass
-
-        print_stats(file_size, status_codes)
-
-    except KeyboardInterrupt:
-        print_stats(file_size, status_codes)
-        raise
+except KeyboardInterrupt:
+    print(f"File size: {total_size}")
+    for code in sorted(status_codes.keys()):
+        if status_codes[code] > 0:
+            print(f"{code}: {status_codes[code]}")
