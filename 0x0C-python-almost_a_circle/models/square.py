@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module contains a class to represent squares. 
+This module contains a class to represent squares.
 It is based on the Rectangle class and inherits its attributes and methods.
 """
 

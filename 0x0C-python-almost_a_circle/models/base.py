@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This module defines a base class for other classes to inherit from. 
-It includes utility functions for working with JSON and CSV data, 
+This module defines a base class for other classes to inherit from.
+It includes utility functions for working with JSON and CSV data,
 as well as a function to draw rectangles and squares using the turtle module.
 """
 
