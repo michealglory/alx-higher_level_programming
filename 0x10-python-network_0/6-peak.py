@@ -23,7 +23,8 @@ def find_peak(list_of_integers):
             if center_e // 2 == 0:
                 center_e = 2
             mid = mid + center_e // 2
-        elif center_e > 0 and list_of_integers[mid] < list_of_integers[mid - 1]:
+        elif (center_e > 0
+              and list_of_integers[mid] < list_of_integers[mid - 1]):
             if center_e // 2 == 0:
                 center_e = 2
             mid = mid - center_e // 2
