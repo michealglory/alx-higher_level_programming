@@ -1,4 +1,3 @@
 #!/bin/bash
-# fetches a resource from a given URL using cURL, with silent mode and
-# following redirects.
-curl -sL "$1"
+# Takes in a URL, sends a GET request to the URL, and also displays the body of response received
+curl -Ls "$1"
